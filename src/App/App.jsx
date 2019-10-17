@@ -8,7 +8,7 @@ import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-
+import { Container, Navbar, Nav, NavDropdown, Button, FormControl, Form } from 'react-bootstrap';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -20,11 +20,18 @@ class App extends React.Component {
     }
 
     render() {
-        const { alert } = this.props;
+        const { alert, user } = this.props;
         return (
-            <div className="jumbotron">
-                <div className="container">
-                    <div className="col-sm-8 col-sm-offset-2">
+                <div className="col-xs-12" >
+                        <Navbar expand="lg" fixed="top" bg="info" variant="light">
+                            <Navbar.Brand href="/login">
+                                {user ?
+                                    <span>Logout</span>
+                                    :
+                                    <span>Login</span>
+                                }
+                            </Navbar.Brand>
+                        </Navbar>
                         {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
                         }
@@ -36,16 +43,16 @@ class App extends React.Component {
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>
-                    </div>
                 </div>
-            </div>
         );
     }
 }
 
 function mapState(state) {
+    const { authentication } = state;
+    const { user } = authentication;
     const { alert } = state;
-    return { alert };
+    return { alert, user };
 }
 
 const actionCreators = {

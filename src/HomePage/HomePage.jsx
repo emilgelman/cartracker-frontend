@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Form, Button, Col } from 'react-bootstrap';
 
 import { userActions } from '../_actions';
 
@@ -27,9 +28,8 @@ class HomePage extends React.Component {
     render() {
         const { user, alerts } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-md-12">
                 <h2>Welcome {user.firstName}!</h2>
-                <h3>Active alerts:</h3>
                 {alerts.loading && <em>Loading users...</em>}
                 {alerts.error && <span className="text-danger">ERROR: {alerts.error}</span>}
                 {alerts.alerts &&
@@ -87,11 +87,13 @@ class HomePage extends React.Component {
                     </tbody>
                     </table>
                 }
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
+                {alerts.alerts && alerts.alerts.length === 0 &&
+                <h4>Looks like you don't have any alerts, add one using the link below</h4>
+                }
             </div>
+
         );
+
     }
 }
 
