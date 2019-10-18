@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Form, Button, Col } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Form, Button, Col, Table} from 'react-bootstrap';
 
-import { userActions } from '../_actions';
+import {userActions} from '../_actions';
 
 class HomePage extends React.Component {
     componentDidMount() {
@@ -11,45 +11,36 @@ class HomePage extends React.Component {
     }
 
 
-    handleAddRow = () => {
-        const item = {
-            name: "",
-            mobile: ""
-        };
-        this.setState({
-            rows: [...this.state.rows, item]
-        });
-    };
 
     handleRemoveSpecificRow = (alert) => {
         this.props.removeAlert(alert._id);
     };
 
     render() {
-        const { user, alerts } = this.props;
+        const {user, alerts} = this.props;
         return (
             <div className="col-md-12">
                 <h2>Welcome {user.firstName}!</h2>
                 {alerts.loading && <em>Loading users...</em>}
                 {alerts.error && <span className="text-danger">ERROR: {alerts.error}</span>}
                 {alerts.alerts &&
-                   /* <ul>
-                        {alerts.alerts.map((alert, index) =>
-                            <li key={alert.manufacturer}>
-                                {alert.manufacturer}
-                            </li>
-                        )}
-                    </ul>*/
-                    <table
+                /* <ul>
+                     {alerts.alerts.map((alert, index) =>
+                         <li key={alert.manufacturer}>
+                             {alert.manufacturer}
+                         </li>
+                     )}
+                 </ul>*/
+                <table
                     className="table table-bordered table-hover"
                     id="tab_logic"
-                    >
+                >
                     <thead>
                     <tr>
-                    <th className="text-center"> # </th>
-                    <th className="text-center"> Manufacturer </th>
-                    <th className="text-center"> Price </th>
-                    <th />
+                        <th className="text-center"> #</th>
+                        <th className="text-center"> Manufacturer</th>
+                        <th className="text-center"> Price</th>
+                        <th/>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,7 +68,7 @@ class HomePage extends React.Component {
                             <td>
                                 <button
                                     className="btn btn-outline-danger btn-sm"
-                                    onClick={() => this.handleRemoveSpecificRow(item,idx)}
+                                    onClick={() => this.handleRemoveSpecificRow(item, idx)}
                                 >
                                     Remove
                                 </button>
@@ -85,11 +76,12 @@ class HomePage extends React.Component {
                         </tr>
                     ))}
                     </tbody>
-                    </table>
+                </table>
                 }
-                {alerts.alerts && alerts.alerts.length === 0 &&
-                <h4>Looks like you don't have any alerts, add one using the link below</h4>
-                }
+
+                <Link to='/add'>
+                    <button type="button" className="btn btn-info">Add</button>
+                </Link>
             </div>
 
         );
@@ -98,16 +90,16 @@ class HomePage extends React.Component {
 }
 
 function mapState(state) {
-    const { alerts, authentication } = state;
-    const { user } = authentication;
-    return { user, alerts };
+    const {alerts, authentication} = state;
+    const {user} = authentication;
+    return {user, alerts};
 }
 
 const actionCreators = {
     getAlerts: userActions.getAlerts,
     deleteUser: userActions.delete,
-    removeAlert : userActions.removeAlert
+    removeAlert: userActions.removeAlert
 };
 
 const connectedHomePage = connect(mapState, actionCreators)(HomePage);
-export { connectedHomePage as HomePage };
+export {connectedHomePage as HomePage};

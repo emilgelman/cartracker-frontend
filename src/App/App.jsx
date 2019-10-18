@@ -8,7 +8,8 @@ import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-import { Container, Navbar, Nav, NavDropdown, Button, FormControl, Form } from 'react-bootstrap';
+import { AddAlert } from '../AddAlert';
+import { Container, Navbar, Nav, NavDropdown, Button, FormControl, Form, Jumbotron } from 'react-bootstrap';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,7 @@ class App extends React.Component {
         return (
                 <div className="col-xs-12" >
                         <Navbar expand="lg" fixed="top" bg="info" variant="light">
+                            <Navbar.Brand href="/">Home</Navbar.Brand>
                             <Navbar.Brand href="/login">
                                 {user ?
                                     <span>Logout</span>
@@ -35,14 +37,18 @@ class App extends React.Component {
                         {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
                         }
-                        <Router history={history}>
+                    <Jumbotron>
+
+                    <Router history={history}>
                             <Switch>
                                 <PrivateRoute exact path="/" component={HomePage} />
+                                <PrivateRoute exact path="/add" component={AddAlert} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>
+                    </Jumbotron>
                 </div>
         );
     }

@@ -9,7 +9,8 @@ export const userActions = {
     register,
     getAlerts,
     removeAlert,
-    delete: _delete
+    delete: _delete,
+    updateModels
 };
 
 function login(username, password) {
@@ -76,6 +77,21 @@ function getAlerts(id) {
     function request() { return { type: userConstants.GETALERTS_REQUEST } }
     function success(alerts) { return { type: userConstants.GETALERTS_SUCCESS, alerts } }
     function failure(error) { return { type: userConstants.GETALERTS_FAILURE, error } }
+}
+
+function updateModels(manufacturers, id) { //todo emilgelm move to model actions
+    return dispatch => {
+        try {
+            let models = manufacturers.filter(manufacturer => manufacturer.value === id)[0].models.model;
+            dispatch(success(models));
+        }
+        catch (err) {
+            dispatch(failure(err));
+        }
+    };
+
+    function success(models) { return { type: userConstants.GETMODELS_SUCCESS, models } }
+    function failure(error) { return { type: userConstants.GETMODELS_FAILURE, error } }
 }
 
 function removeAlert(id) {
