@@ -25,12 +25,12 @@ class App extends React.Component {
         return (
                 <div className="col-xs-12" >
                         <Navbar expand="lg" fixed="top" bg="info" variant="light">
-                            <Navbar.Brand href="/">Home</Navbar.Brand>
+                            <Navbar.Brand href="/">בית</Navbar.Brand>
                             <Navbar.Brand href="/login">
                                 {user ?
-                                    <span>Logout</span>
+                                    <span>התנתק</span>
                                     :
-                                    <span>Login</span>
+                                    <span>התחבר</span>
                                 }
                             </Navbar.Brand>
                         </Navbar>

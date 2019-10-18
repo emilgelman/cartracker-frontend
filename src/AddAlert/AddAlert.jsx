@@ -56,7 +56,7 @@ class AddAlert extends React.Component {
 
 
                         <Form.Group as={Col} controlId="formManufacturer">
-                            <Form.Label>Manufacturer</Form.Label>
+                            <Form.Label>יצרן</Form.Label>
                             <Form.Control as="select" onChange={(event) => this.handleChange(event)}>
                                 {modelData.map((model, index) =>
                                     <option key={model.value} id={model.value}>
@@ -67,7 +67,7 @@ class AddAlert extends React.Component {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formModel">
-                            <Form.Label>Model</Form.Label>
+                            <Form.Label>דגם</Form.Label>
                             <Form.Control as="select">
                                 {models.models && models.models.map((model, index) =>
                                     <option key={model.value} id={model.value}>
@@ -81,14 +81,14 @@ class AddAlert extends React.Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="formYearFrom">
-                            <Form.Label>From year</Form.Label>
+                            <Form.Label>שנה מ</Form.Label>
                             <Form.Control as="select">
                                 {years().map(y => <option key={y}>{y}</option>)}
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formYearTo">
-                            <Form.Label>To year</Form.Label>
+                            <Form.Label>שנה עד</Form.Label>
                             <Form.Control as="select">
                                 {years().map(y => <option key={y}>{y}</option>)}
                             </Form.Control>
@@ -97,13 +97,13 @@ class AddAlert extends React.Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="formPriceFrom">
-                            <Form.Label>From price</Form.Label>
+                            <Form.Label>מחיר מ</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="fromPriceTo">
-                            <Form.Label>To price</Form.Label>
+                            <Form.Label>מחיר עד</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
@@ -111,13 +111,13 @@ class AddAlert extends React.Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="formKmFrom">
-                            <Form.Label>from KM</Form.Label>
+                            <Form.Label>קמ מ</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formKmTo">
-                            <Form.Label>to KM</Form.Label>
+                            <Form.Label>קמ עד</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
@@ -125,13 +125,13 @@ class AddAlert extends React.Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="fromEngineSize">
-                            <Form.Label>From engine size</Form.Label>
+                            <Form.Label>נפח מנוע מ</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="toEngineSize">
-                            <Form.Label>To engine size</Form.Label>
+                            <Form.Label>נפח מנוע עד</Form.Label>
                             <Form.Control as="input">
                             </Form.Control>
                         </Form.Group>
@@ -139,14 +139,14 @@ class AddAlert extends React.Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="fromHand">
-                            <Form.Label>From hand</Form.Label>
+                            <Form.Label>יד מ</Form.Label>
                             <Form.Control as="select">
                                 {hands().map(h => <option key={h}>{h}</option>)}
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="toHand">
-                            <Form.Label>To hand</Form.Label>
+                            <Form.Label>יד עד</Form.Label>
                             <Form.Control as="select">
                                 {hands().map(h => <option key={h}>{h}</option>)}
                             </Form.Control>
@@ -158,12 +158,12 @@ class AddAlert extends React.Component {
                         <tr>
                             <td>
                     <Button variant="info" type="submit">
-                        Add
+                        הוספה
                     </Button>
                             </td>
                             <td>
                     <Link to='/'>
-                        <button type="button" className="btn btn-info">Back</button>
+                        <button type="button" className="btn btn-info">חזור</button>
                     </Link>
                             </td>
                         </tr>

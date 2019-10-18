@@ -19,8 +19,8 @@ class HomePage extends React.Component {
     render() {
         const {user, alerts} = this.props;
         return (
-            <div className="col-md-12">
-                <h2>Welcome {user.firstName}!</h2>
+            <div  className="col" >
+                <h2>שלום {user.firstName}!</h2>
                 {alerts.loading && <em>Loading users...</em>}
                 {alerts.error && <span className="text-danger">ERROR: {alerts.error}</span>}
                 {alerts.alerts &&
@@ -38,8 +38,8 @@ class HomePage extends React.Component {
                     <thead>
                     <tr>
                         <th className="text-center"> #</th>
-                        <th className="text-center"> Manufacturer</th>
-                        <th className="text-center"> Price</th>
+                        <th className="text-center"> יצרן</th>
+                        <th className="text-center"> מחיר</th>
                         <th/>
                     </tr>
                     </thead>
@@ -80,7 +80,7 @@ class HomePage extends React.Component {
                 }
 
                 <Link to='/add'>
-                    <button type="button" className="btn btn-info">Add</button>
+                    <button type="button" className="btn btn-info">הוסף התראה</button>
                 </Link>
             </div>
 
