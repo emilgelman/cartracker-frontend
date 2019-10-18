@@ -10,7 +10,8 @@ export const userService = {
     update,
     getAlerts,
     removeAlert,
-    delete: _delete
+    delete: _delete,
+    addAlert
 };
 
 function login(username, password) {
@@ -51,6 +52,18 @@ function getAlerts(id) {
     };
 
     return fetch(`${config.apiUrl}/users/${id}/alerts`, requestOptions).then(handleResponse);
+
+}
+
+function addAlert(alert) {
+    const requestOptions = {
+        method: 'POST',
+        // headers: authHeader(),
+        headers: { 'Content-Type': 'application/json' },
+        body : JSON.stringify(alert)
+
+    };
+    return fetch(`${config.apiUrl}/alerts`, requestOptions).then(handleResponse);
 
 }
 

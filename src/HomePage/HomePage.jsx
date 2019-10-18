@@ -39,7 +39,11 @@ class HomePage extends React.Component {
                     <tr>
                         <th className="text-center"> #</th>
                         <th className="text-center"> יצרן</th>
+                        <th className="text-center"> דגם</th>
                         <th className="text-center"> מחיר</th>
+                        <th className="text-center"> יד</th>
+                        <th className="text-center"> קמ</th>
+                        <th className="text-center"> מנוע</th>
                         <th/>
                     </tr>
                     </thead>
@@ -59,8 +63,44 @@ class HomePage extends React.Component {
                             <td>
                                 <input
                                     type="text"
+                                    name="model"
+                                    value={alerts.alerts[idx].model}
+                                    className="form-control"
+                                    readOnly
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
                                     name="price"
                                     value={alerts.alerts[idx].price}
+                                    className="form-control"
+                                    readOnly
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="hand"
+                                    value={alerts.alerts[idx].hand}
+                                    className="form-control"
+                                    readOnly
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="km"
+                                    value={alerts.alerts[idx].km}
+                                    className="form-control"
+                                    readOnly
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="engineval"
+                                    value={alerts.alerts[idx].engineval}
                                     className="form-control"
                                     readOnly
                                 />
@@ -70,7 +110,7 @@ class HomePage extends React.Component {
                                     className="btn btn-outline-danger btn-sm"
                                     onClick={() => this.handleRemoveSpecificRow(item, idx)}
                                 >
-                                    Remove
+                                    הסר
                                 </button>
                             </td>
                         </tr>

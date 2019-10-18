@@ -1,7 +1,7 @@
-import { userConstants } from '../_constants';
-import { userService } from '../_services';
-import { alertActions } from './';
-import { history } from '../_helpers';
+import {userConstants} from '../_constants';
+import {userService} from '../_services';
+import {alertActions} from './';
+import {history} from '../_helpers';
 
 export const userActions = {
     login,
@@ -10,16 +10,17 @@ export const userActions = {
     getAlerts,
     removeAlert,
     delete: _delete,
-    updateModels
+    updateModels,
+    addAlert
 };
 
 function login(username, password) {
     return dispatch => {
-        dispatch(request({ username }));
+        dispatch(request({username}));
 
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/');
                 },
@@ -30,14 +31,22 @@ function login(username, password) {
             );
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function request(user) {
+        return {type: userConstants.LOGIN_REQUEST, user}
+    }
+
+    function success(user) {
+        return {type: userConstants.LOGIN_SUCCESS, user}
+    }
+
+    function failure(error) {
+        return {type: userConstants.LOGIN_FAILURE, error}
+    }
 }
 
 function logout() {
     userService.logout();
-    return { type: userConstants.LOGOUT };
+    return {type: userConstants.LOGOUT};
 }
 
 function register(user) {
@@ -46,7 +55,7 @@ function register(user) {
 
         userService.register(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
@@ -58,9 +67,17 @@ function register(user) {
             );
     };
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+    function request(user) {
+        return {type: userConstants.REGISTER_REQUEST, user}
+    }
+
+    function success(user) {
+        return {type: userConstants.REGISTER_SUCCESS, user}
+    }
+
+    function failure(error) {
+        return {type: userConstants.REGISTER_FAILURE, error}
+    }
 }
 
 function getAlerts(id) {
@@ -74,9 +91,17 @@ function getAlerts(id) {
             );
     };
 
-    function request() { return { type: userConstants.GETALERTS_REQUEST } }
-    function success(alerts) { return { type: userConstants.GETALERTS_SUCCESS, alerts } }
-    function failure(error) { return { type: userConstants.GETALERTS_FAILURE, error } }
+    function request() {
+        return {type: userConstants.GETALERTS_REQUEST}
+    }
+
+    function success(alerts) {
+        return {type: userConstants.GETALERTS_SUCCESS, alerts}
+    }
+
+    function failure(error) {
+        return {type: userConstants.GETALERTS_FAILURE, error}
+    }
 }
 
 function updateModels(manufacturers, id) { //todo emilgelm move to model actions
@@ -84,14 +109,18 @@ function updateModels(manufacturers, id) { //todo emilgelm move to model actions
         try {
             let models = manufacturers.filter(manufacturer => manufacturer.value === id)[0].models.model;
             dispatch(success(models));
-        }
-        catch (err) {
+        } catch (err) {
             dispatch(failure(err));
         }
     };
 
-    function success(models) { return { type: userConstants.GETMODELS_SUCCESS, models } }
-    function failure(error) { return { type: userConstants.GETMODELS_FAILURE, error } }
+    function success(models) {
+        return {type: userConstants.GETMODELS_SUCCESS, models}
+    }
+
+    function failure(error) {
+        return {type: userConstants.GETMODELS_FAILURE, error}
+    }
 }
 
 function removeAlert(id) {
@@ -105,9 +134,45 @@ function removeAlert(id) {
             );
     };
 
-    function request(id) { return { type: userConstants.REMOVEALERT_REQUEST, id } }
-    function success(id) { return { type: userConstants.REMOVEALERT_SUCCESS, id } }
-    function failure(error) { return { type: userConstants.REMOVEALERT_FAILURE, id, error } }
+    function request(id) {
+        return {type: userConstants.REMOVEALERT_REQUEST, id}
+    }
+
+    function success(id) {
+        return {type: userConstants.REMOVEALERT_SUCCESS, id}
+    }
+
+    function failure(error) {
+        return {type: userConstants.REMOVEALERT_FAILURE, id, error}
+    }
+}
+
+function addAlert(alert) {
+    return dispatch => {
+        dispatch(request(alert));
+
+        userService.addAlert(alert)
+            .then(
+                () => {
+                    dispatch(success("success adding alert"));
+                    history.push('/');
+                    dispatch(alertActions.success('Registration successful'))
+                },
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request(id) {
+        return {type: userConstants.ADDALERT_REQUEST, id}
+    }
+
+    function success(id) {
+        return {type: userConstants.ADDALERT_SUCCESS, id}
+    }
+
+    function failure(error) {
+        return {type: userConstants.ADDALERT_FAILURE, id, error}
+    }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -122,7 +187,15 @@ function _delete(id) {
             );
     };
 
-    function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-    function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+    function request(id) {
+        return {type: userConstants.DELETE_REQUEST, id}
+    }
+
+    function success(id) {
+        return {type: userConstants.DELETE_SUCCESS, id}
+    }
+
+    function failure(id, error) {
+        return {type: userConstants.DELETE_FAILURE, id, error}
+    }
 }
