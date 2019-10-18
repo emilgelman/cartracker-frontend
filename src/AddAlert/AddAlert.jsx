@@ -4,6 +4,25 @@ import modelData from '../Lib/models';
 import {alertActions, userActions} from '../_actions';
 import { Form, Button, Col, Table } from 'react-bootstrap';
 import {Link} from "react-router-dom";
+
+const years = () => {
+    let result = [];
+    for (let i=new Date().getFullYear();i>1970;i--)
+    {
+        result.push(i);
+    }
+    return result;
+};
+
+const hands = () => {
+    let result = [];
+    for (let i=0;i<5;i++)
+    {
+        result.push(i);
+    }
+    return result;
+};
+
 class AddAlert extends React.Component {
     constructor(props)
     {
@@ -23,6 +42,7 @@ class AddAlert extends React.Component {
     updateModels(id) {
         this.props.updateModels(modelData, id);
     }
+
 
 
     render() {
@@ -63,16 +83,14 @@ class AddAlert extends React.Component {
                         <Form.Group as={Col} controlId="formYearFrom">
                             <Form.Label>From year</Form.Label>
                             <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
+                                {years().map(y => <option key={y}>{y}</option>)}
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formYearTo">
                             <Form.Label>To year</Form.Label>
                             <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
+                                {years().map(y => <option key={y}>{y}</option>)}
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
@@ -120,19 +138,17 @@ class AddAlert extends React.Component {
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formYearFrom">
+                        <Form.Group as={Col} controlId="fromHand">
                             <Form.Label>From hand</Form.Label>
                             <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
+                                {hands().map(h => <option key={h}>{h}</option>)}
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formYearTo">
+                        <Form.Group as={Col} controlId="toHand">
                             <Form.Label>To hand</Form.Label>
                             <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
+                                {hands().map(h => <option key={h}>{h}</option>)}
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
