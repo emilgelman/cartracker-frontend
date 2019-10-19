@@ -26,8 +26,6 @@ class AddAlert extends React.Component {
         super(props);
         this.updateModels("1");
         this.handleSubmit = this.handleSubmit.bind(this);
-
-
     }
 
 
@@ -57,9 +55,11 @@ class AddAlert extends React.Component {
 
 
     render() {
-        const {user, models} = this.props;
+        const {user, models, alert} = this.props;
         return (
             <div className="col-4 col">
+                {alert.message && <span className="text-danger">אירעה שגיעה, אין אפשרות להוסיף התראה חדשה</span>}
+
                 <Form onSubmit={this.handleSubmit}>
 
                     <Form.Row>
@@ -178,9 +178,9 @@ class AddAlert extends React.Component {
 }
 
 function mapState(state) {
-    const {alerts, authentication, models} = state;
+    const {alerts, authentication, models,alert } = state;
     const {user} = authentication;
-    return {user, alerts, models};
+    return {user, alerts, models, alert};
 }
 
 const actionCreators = {

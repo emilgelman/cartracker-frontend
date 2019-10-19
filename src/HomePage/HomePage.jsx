@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Form, Button, Col, Table} from 'react-bootstrap';
 
 import {userActions} from '../_actions';
 
@@ -17,20 +16,13 @@ class HomePage extends React.Component {
     };
 
     render() {
-        const {user, alerts} = this.props;
+        const {user, alerts, alert} = this.props;
         return (
             <div  className="col" >
                 <h2>שלום {user.firstName}!</h2>
-                {alerts.loading && <em>Loading users...</em>}
-                {alerts.error && <span className="text-danger">ERROR: {alerts.error}</span>}
+                {alerts.loading && <em>טוען התראות...</em>}
+                {alert.message && <span className="text-danger">שגיאה: אין אפשרות להציג התראות</span>}
                 {alerts.alerts &&
-                /* <ul>
-                     {alerts.alerts.map((alert, index) =>
-                         <li key={alert.manufacturer}>
-                             {alert.manufacturer}
-                         </li>
-                     )}
-                 </ul>*/
                 <table
                     className="table table-bordered table-hover"
                     id="tab_logic"
@@ -130,9 +122,9 @@ class HomePage extends React.Component {
 }
 
 function mapState(state) {
-    const {alerts, authentication} = state;
+    const {alerts, authentication, alert} = state;
     const {user} = authentication;
-    return {user, alerts};
+    return {user, alerts, alert};
 }
 
 const actionCreators = {

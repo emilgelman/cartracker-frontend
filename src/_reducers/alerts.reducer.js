@@ -10,6 +10,10 @@ export function alerts(state = {}, action) {
       return {
         alerts: action.alerts
       };
+    case userConstants.ADDALERT_FAILURE:
+      return {
+        error: action.error
+      };
     case userConstants.GETALERTS_FAILURE:
       return { 
         error: action.error

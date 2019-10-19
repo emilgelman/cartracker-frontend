@@ -87,8 +87,11 @@ function getAlerts(id) {
         userService.getAlerts(id)
             .then(
                 alerts => dispatch(success(alerts)),
-                error => dispatch(failure(error.toString()))
-            );
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+                );
     };
 
     function request() {
@@ -158,7 +161,10 @@ function addAlert(alert) {
                     history.push('/');
                     dispatch(alertActions.success('Registration successful'))
                 },
-                error => dispatch(failure(error.toString()))
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
             );
     };
 
@@ -171,7 +177,7 @@ function addAlert(alert) {
     }
 
     function failure(error) {
-        return {type: userConstants.ADDALERT_FAILURE, id, error}
+        return {type: userConstants.ADDALERT_FAILURE, error}
     }
 }
 
