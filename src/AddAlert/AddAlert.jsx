@@ -38,11 +38,14 @@ class AddAlert extends React.Component {
         event.preventDefault();
         const data = new FormData(event.target);
         const alert = {
-            manufacturer : data.get("manufacturer"),
-            model :data.get("model"),
+            manufacturer : event.target[0].selectedOptions[0].id,
+            manufacturer_text : `${data.get("manufacturer")}`,
+            model :event.target[1].selectedOptions[0].id,
+            model_text : `${data.get("model")}`,
             price: `${data.get("priceFrom")}-${data.get("priceTo")}`,
             km : `${data.get("kmFrom")}-${data.get("kmTo")}`,
             hand : `${data.get("handFrom")}-${data.get("handTo")}`,
+            year : `${data.get("yearFrom")}-${data.get("yearTo")}`,
             engineval : `${data.get("enginevalFrom")}-${data.get("enginevalTo")}`,
             username : this.props.user.username
         };
@@ -57,8 +60,8 @@ class AddAlert extends React.Component {
     render() {
         const {user, models, alert} = this.props;
         return (
-            <div className="col-4 col">
-                {alert.message && <span className="text-danger">אירעה שגיעה, אין אפשרות להוסיף התראה חדשה</span>}
+            <div className="col">
+                {alert.type && alert.type === 'alert-error' && <span className="text-danger">אירעה שגיעה, אין אפשרות להוסיף התראה חדשה</span>}
 
                 <Form onSubmit={this.handleSubmit}>
 

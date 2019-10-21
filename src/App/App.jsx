@@ -23,9 +23,10 @@ class App extends React.Component {
     render() {
         const { alert, user } = this.props;
         return (
-                <div className="col-xs-12" >
+                <div className="w-auto" >
                         <Navbar expand="lg" fixed="top" bg="info" variant="light">
                             <Navbar.Brand href="/">בית</Navbar.Brand>
+                            <Navbar.Brand>|</Navbar.Brand>
                             <Navbar.Brand href="/login">
                                 {user ?
                                     <span>התנתק</span>
@@ -37,7 +38,7 @@ class App extends React.Component {
                         {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
                         }
-                    <Jumbotron>
+                    <Jumbotron style={{"height": "100vh"}}>
 
                     <Router history={history}>
                             <Switch>
@@ -49,6 +50,12 @@ class App extends React.Component {
                             </Switch>
                         </Router>
                     </Jumbotron>
+
+                    <Navbar expand="lg" fixed="bottom" bg="info" variant="light">
+                        <Navbar.Brand href="https://www.linkedin.com/in/emil-gelman-653787105">2019 Emil Gelman © </Navbar.Brand>
+                    </Navbar>
+
+
                 </div>
         );
     }
